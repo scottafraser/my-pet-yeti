@@ -5,7 +5,8 @@ import Pet from "./Pet";
 import { PrimaryButton } from "pivotal-ui/react/buttons";
 import { Icon } from "pivotal-ui/react/iconography";
 import Dead from './Dead';
-import Menu from './Menu'
+import Menu from './Menu';
+import Timer from './Timer'
 
 
 class App extends Component {
@@ -55,19 +56,19 @@ class App extends Component {
   handleFeed() {
       this.setState({ feed: this.state.feed + 10 });
       this.setState({ fed: true })
-      setTimeout(() => this.setState({ fed: false }), 3000);    
+      setTimeout(() => this.setState({ fed: false }), 4000);    
   }
 
   handlePlay() {
     this.setState({ play: this.state.play + 10 });
     this.setState({ played: true })
-    setTimeout(() => this.setState({ played: false }), 3000);  
+    setTimeout(() => this.setState({ played: false }), 4000);  
   }
 
   handleSleep() {
     this.setState({ sleep: this.state.sleep + 10 });
     this.setState({ slept: true })
-    setTimeout(() => this.setState({ slept: false }), 3000); 
+    setTimeout(() => this.setState({ slept: false }), 4000); 
   }
 
   render() {
@@ -81,6 +82,7 @@ class App extends Component {
     }
 
     return <div className="App">
+        <Timer status={this.state.status}/>
         {pet}
         <Menu feed={this.state.feed} play={this.state.play} sleep={this.state.sleep} />
         <PrimaryButton onClick={this.handleFeed} icon={<Icon src="add" />}>
