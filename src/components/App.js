@@ -4,14 +4,11 @@ import "./App.css";
 import Pet from "./Pet";
 import { PrimaryButton } from "pivotal-ui/react/buttons";
 import { Icon } from "pivotal-ui/react/iconography";
-import yeti from "./images/yeti.gif";
-import feed from "./images/Feed.gif";
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      image: yeti,
       status: "Alive",
       feed: 100,
       fed: false,
@@ -48,28 +45,20 @@ class App extends Component {
       this.componentWillUnmount();
     }
   }
-
-  // componentDidUpdate(prevState) {
-  //   if (this.state.image !== prevState.image) {
-  //     setTimeout(
-  //       function () {
-  //         this.state.image = prevState.image;
-  //       }
-  //         .bind(this),
-  //       2000
-  //     );
-  //     ;
-  //   }
-  // }
-
+ 
   handleFeed() {
       this.setState({ feed: this.state.feed + 10 });
-      this.setState({ fed: true })
-      // setTimeout(function () {
-      //   this.setState({ fed: yeti})
-      // }
-      // .bind(this),
-      //  1000);      
+      this.setState({ fed: true })  
+  }
+
+  handlePlay() {
+    this.setState({ feed: this.state.play + 10 });
+    this.setState({ fed: true })
+  }
+
+  handleSleep() {
+    this.setState({ feed: this.state.sleep + 10 });
+    this.setState({ fed: true })
   }
 
   render() {
@@ -81,8 +70,8 @@ class App extends Component {
         <p>{this.state.play}</p>
         <p>{this.state.sleep}</p>
         <PrimaryButton onClick={this.handleFeed} icon={<Icon src="add" />}>Feed</PrimaryButton>
-        <PrimaryButton icon={<Icon src="add" />}>Clean</PrimaryButton>
-        <PrimaryButton icon={<Icon src="add" />}>Sleep</PrimaryButton>
+        <PrimaryButton onClick={this.handlePlay} icon={<Icon src="add" />}>Play</PrimaryButton>
+        <PrimaryButton onClick={this.handleSleep} icon={<Icon src="add" />}>Sleep</PrimaryButton>
       </div>
     );
   }
@@ -91,6 +80,8 @@ class App extends Component {
 
 Pet.propTypes = {
   fed: PropTypes.bool,
+  played: PropTypes.bool,
+  slept: PropTypes.bool,
 };
 
 

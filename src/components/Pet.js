@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import yeti from "./images/yeti.gif";
-import feed from './images/Feed.gif'
+import feed from './images/Feed.gif';
+import play from './images/play.gif';
+import sleep from './images/sleep.gif';
 
 
 class Pet extends Component {
@@ -14,6 +16,10 @@ class Pet extends Component {
 componentDidUpdate(prevProps) {
   if(this.props.fed !== prevProps.fed) {
     this.setState({ image: feed })
+  } else if (this.props.played !== prevProps.played) {
+    this.setState({ image: play })
+  } else if (this.props.slept !== prevProps.slept) {
+    this.setState({ image: sleep })
   }
   this.timeout()
 }
