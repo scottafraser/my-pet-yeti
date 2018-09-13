@@ -28,7 +28,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.petTimer = setInterval(() => this.updatePetTime(), 4000);
+    this.petTimer = setInterval(() => this.updatePetTime(), 2000);
   }
 
   updatePetTime() {
@@ -44,9 +44,9 @@ class App extends Component {
 
   handleStatus() {
     if (
-      this.state.feed <= 0 ||
-      this.state.play <= 0 ||
-      this.state.sleep <= 0
+      this.state.feed <= 10 ||
+      this.state.play <= 7 ||
+      this.state.sleep <= 8
     ) {
       this.setState({ status: (this.setState.status = "DEAD") });
       this.componentWillUnmount();

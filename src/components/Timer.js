@@ -1,4 +1,5 @@
 import React from "react";
+import Moment from 'react-moment'
 
 class Timer extends React.Component {
     constructor(props) {
@@ -24,14 +25,25 @@ class Timer extends React.Component {
             time: Date.now() - this.state.start
         }), 1);
     }
+
+
+    componentDidUpdate(prevProps) {
+        if(this.props.status !== prevProps.status) {
+            this.setState({ isOn : false })
+            clearInterval(this.timer);
+        }
+    }
  
     resetTimer() {
         this.setState({ time: 0 })
     }
+
     render() {
+        var newTime = this.state.time;
+
         return (
             <div>
-                <h3>timer: {this.state.time}</h3>
+                <h3>timer: {newTime}</h3>
             </div>
         )
     }

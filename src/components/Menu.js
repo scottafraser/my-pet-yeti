@@ -2,14 +2,12 @@ import React from "react";
 
 function Menu(props) {
 
-    return (
-      <div>
-        <p>{props.status}</p>
-        <p>{props.feed}</p>
-        <p>{props.play}</p>
-        <p>{props.sleep}</p>
-      </div>
-    );
+    return <div>
+        <h1>Hunger: {props.feed}</h1>
+        <h1>Play: {props.play}</h1>
+        <h1>Tired: {props.sleep}</h1>
+        <br></br>
+      </div>;
   }
 
 export default Menu;
