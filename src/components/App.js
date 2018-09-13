@@ -4,6 +4,7 @@ import "./App.css";
 import Pet from "./Pet";
 import { PrimaryButton } from "pivotal-ui/react/buttons";
 import { Icon } from "pivotal-ui/react/iconography";
+import Dead from './Dead.js'
 
 class App extends Component {
   constructor(props) {
@@ -24,14 +25,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.petTimer = setInterval(() => this.updatePetTime(), 4000);
+    this.petTimer = setInterval(() => this.updatePetTime(), 1000);
   }
 
   updatePetTime() {
     this.handleStatus();
-    this.setState({ feed: this.state.feed - 20 });
-    this.setState({ play: this.state.play - 10 });
-    this.setState({ sleep: this.state.sleep - 10 });
+    this.setState({ feed: this.state.feed - 8 });
+    this.setState({ play: this.state.play - 7 });
+    this.setState({ sleep: this.state.sleep - 5 });
   }
 
   componentWillUnmount() {
@@ -66,7 +67,7 @@ class App extends Component {
     this.setState({ played: true })
     setTimeout(
       function () {
-        this.setState({ fed: false });
+        this.setState({ played: false });
       }
         .bind(this),
       1000
@@ -78,7 +79,7 @@ class App extends Component {
     this.setState({ slept: true })
     setTimeout(
       function () {
-        this.setState({ fed: false });
+        this.setState({ slept: false });
       }
         .bind(this),
       1000
@@ -87,7 +88,8 @@ class App extends Component {
 
   render() {
     return <div className="App">
-        <Pet fed={this.state.fed} played={this.state.played} slept={this.state.slept} />
+        <Pet status={"Alive"} fed={this.state.fed} played={this.state.played} slept={this.state.slept}/>
+        <Dead status={"DEAD"} />
         <p>{this.state.status}</p>
         <p>{this.state.feed}</p>
         <p>{this.state.play}</p>
@@ -110,6 +112,7 @@ Pet.propTypes = {
   fed: PropTypes.bool,
   played: PropTypes.bool,
   slept: PropTypes.bool,
+  status: PropTypes.string
 };
 
 

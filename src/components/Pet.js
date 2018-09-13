@@ -5,6 +5,7 @@ import play from './images/play.gif';
 import sleep from './images/sleep.gif';
 
 
+
 class Pet extends Component {
   constructor(props) {
     super(props);
@@ -20,7 +21,7 @@ componentDidUpdate(prevProps) {
     this.setState({ image: play })
   } else if (this.props.slept !== prevProps.slept) {
     this.setState({ image: sleep })
-  }
+  } 
   this.timeout()
 }
 
@@ -31,7 +32,7 @@ timeout() {
         this.setState({ image: yeti });
       }
         .bind(this),
-      3000
+      4000
     );
   }
 }
