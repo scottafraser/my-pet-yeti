@@ -4,7 +4,9 @@ import "./App.css";
 import Pet from "./Pet";
 import { PrimaryButton } from "pivotal-ui/react/buttons";
 import { Icon } from "pivotal-ui/react/iconography";
-import Dead from './Dead.js'
+import Dead from './Dead';
+import Menu from './Menu'
+
 
 class App extends Component {
   constructor(props) {
@@ -25,14 +27,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.petTimer = setInterval(() => this.updatePetTime(), 1000);
+    this.petTimer = setInterval(() => this.updatePetTime(), 4000);
   }
 
   updatePetTime() {
     this.handleStatus();
-    this.setState({ feed: this.state.feed - 8 });
+    this.setState({ feed: this.state.feed - 10 });
     this.setState({ play: this.state.play - 7 });
-    this.setState({ sleep: this.state.sleep - 5 });
+    this.setState({ sleep: this.state.sleep - 8 });
   }
 
   componentWillUnmount() {
@@ -41,9 +43,9 @@ class App extends Component {
 
   handleStatus() {
     if (
-      this.state.feed === 10 ||
-      this.state.play === 10 ||
-      this.state.sleep === 10
+      this.state.feed <= 0 ||
+      this.state.play <= 0 ||
+      this.state.sleep <= 0
     ) {
       this.setState({ status: (this.setState.status = "DEAD") });
       this.componentWillUnmount();
@@ -52,48 +54,35 @@ class App extends Component {
  
   handleFeed() {
       this.setState({ feed: this.state.feed + 10 });
-      this.setState({ fed: true })   
-      setTimeout(
-        function () {
-          this.setState({ fed: false });
-        }
-          .bind(this),
-        1000
-      );  
+      this.setState({ fed: true })
+      setTimeout(() => this.setState({ fed: false }), 3000);    
   }
 
   handlePlay() {
     this.setState({ play: this.state.play + 10 });
     this.setState({ played: true })
-    setTimeout(
-      function () {
-        this.setState({ played: false });
-      }
-        .bind(this),
-      1000
-    );  
+    setTimeout(() => this.setState({ played: false }), 3000);  
   }
 
   handleSleep() {
     this.setState({ sleep: this.state.sleep + 10 });
     this.setState({ slept: true })
-    setTimeout(
-      function () {
-        this.setState({ slept: false });
-      }
-        .bind(this),
-      1000
-    );  
+    setTimeout(() => this.setState({ slept: false }), 3000); 
   }
 
   render() {
+    const status = this.state.status
+    let pet;
+
+    if (status === "Alive" ) {
+      pet = <Pet fed={this.state.fed} played={this.state.played} slept={this.state.slept} />
+    } else {
+      pet = <Dead />
+    }
+
     return <div className="App">
-        <Pet status={"Alive"} fed={this.state.fed} played={this.state.played} slept={this.state.slept}/>
-        <Dead status={"DEAD"} />
-        <p>{this.state.status}</p>
-        <p>{this.state.feed}</p>
-        <p>{this.state.play}</p>
-        <p>{this.state.sleep}</p>
+        {pet}
+        <Menu feed={this.state.feed} play={this.state.play} sleep={this.state.sleep} />
         <PrimaryButton onClick={this.handleFeed} icon={<Icon src="add" />}>
           Feed
         </PrimaryButton>
@@ -112,7 +101,11 @@ Pet.propTypes = {
   fed: PropTypes.bool,
   played: PropTypes.bool,
   slept: PropTypes.bool,
-  status: PropTypes.string
+  status: PropTypes.string,
+  feed: PropTypes.string,
+  play: PropTypes.string,
+  sleep: PropTypes.string
+
 };
 
 

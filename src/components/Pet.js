@@ -27,13 +27,7 @@ componentDidUpdate(prevProps) {
 
 timeout() {
   if (this.state.image !== yeti){
-    setTimeout(
-      function () {
-        this.setState({ image: yeti });
-      }
-        .bind(this),
-      4000
-    );
+    setTimeout(() => this.setState({ image: yeti }), 4000);
   }
 }
 
