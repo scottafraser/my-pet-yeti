@@ -10,8 +10,15 @@ class Pet extends Component {
       image: yeti,
     };
   }
-componentDidMount() {
-  console.log(this.props.status);
+componentDidUpdate() {
+  setTimeout(
+    function () {
+      console.log(this.props.status);
+      ;
+    }
+      .bind(this),
+    1000
+  );
 }
   render() {
     return (
