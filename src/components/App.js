@@ -49,23 +49,33 @@ class App extends Component {
     }
   }
 
+  // componentDidUpdate(prevState) {
+  //   if (this.state.image !== prevState.image) {
+  //     setTimeout(
+  //       function () {
+  //         this.state.image = prevState.image;
+  //       }
+  //         .bind(this),
+  //       2000
+  //     );
+  //     ;
+  //   }
+  // }
+
   handleFeed() {
       this.setState({ feed: this.state.feed + 10 });
-      this.setState({ image: feed })
-      setTimeout(function () {
-        this.setState({ fed: yeti})
-      }
-      .bind(this),
-       1000);
-      
-      console.log(this.state.fed);
-      
+      this.setState({ fed: true })
+      // setTimeout(function () {
+      //   this.setState({ fed: yeti})
+      // }
+      // .bind(this),
+      //  1000);      
   }
 
   render() {
     return (
       <div className="App">
-        <Pet status={this.state.image}/>
+        <Pet fed={this.state.fed}/>
         <p>{this.state.status}</p>
         <p>{this.state.feed}</p>
         <p>{this.state.play}</p>
@@ -81,7 +91,6 @@ class App extends Component {
 
 Pet.propTypes = {
   fed: PropTypes.bool,
-  image: PropTypes.string,
 };
 
 
